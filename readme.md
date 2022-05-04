@@ -1,1 +1,2 @@
 - Data is generated using the music-os crawler
+- See music-os-schema for JSON schema
