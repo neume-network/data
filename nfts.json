@@ -12,7 +12,7 @@
     "erc721": {
       "version": "0.0.1",
       "address": "0x0000000000000000000000000000000000000000",
-      "tokenId": "0",
+      "tokenId": "19",
       "tokenURI": "https://example.com/metadata.json",
       "metadata": {
         "name": "Fever Dream #19",
@@ -60,7 +60,7 @@
     "erc721": {
       "version": "0.0.1",
       "address": "0x0000000000000000000000000000000000000000",
-      "tokenId": "0",
+      "tokenId": "16",
       "tokenURI": "https://example.com/metadata.json",
       "metadata": {
         "name": "Fever Dream #16",
