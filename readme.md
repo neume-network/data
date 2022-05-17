@@ -1,2 +1,2 @@
-- Data is generated using the music-os crawler
-- See music-os-schema for JSON schema
+- Data is generated using neume-network/core
+- See neume-network/schema for JSON schema
