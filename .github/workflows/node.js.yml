@@ -29,4 +29,14 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
+    - name: Install neume-network/core dependencies
+      run: npm ci
+    - name: Run indexer
+      run: npm run dev
+      env:
+        DATA_DIR: data
+        RPC_HTTP_HOST: ${{ secrets.RPC_HTTP_HOST }}
+        RPC_API_KEY: ""
+        IPFS_HTTPS_GATEWAY: ${{ secrets.IPFS_HTTPS_GATEWAY }}
+        IPFS_HTTPS_GATEWAY_KEY: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
+        EXTRACTION_WORKER_CONCURRENCY: 100
