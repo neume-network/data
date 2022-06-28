@@ -19,7 +19,7 @@ jobs:
     - name: Checkout neume-network/data repository
       uses: actions/checkout@v3
       with:
-        path: indexer-results
+        path: data-dir
     - name: Checkout neume-network/core
       uses: actions/checkout@v3
       with:
@@ -32,9 +32,9 @@ jobs:
         cache: 'npm'
     - name: Install neume-network/core dependencies
       run: npm ci
-    - run: pwd
+    - run: ls data-dir
     - name: Delete old indexing result
-      run: rm ../indexer-results/*
+      run: rm data-dir/*
     - name: Run indexer
       run: npm run dev
       env:
