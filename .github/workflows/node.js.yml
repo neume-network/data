@@ -19,13 +19,12 @@ jobs:
     - name: Checkout neume-network/data repository
       uses: actions/checkout@v3
       with:
-        path: data
+        path: indexer-results
     - name: Checkout neume-network/core
       uses: actions/checkout@v3
       with:
         repository: neume-network/core
         ref: data-test-branch
-        path: core
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
@@ -34,11 +33,11 @@ jobs:
     - name: Install neume-network/core dependencies
       run: npm ci
     - name: Delete old indexing result
-      run: rm ../data/*
+      run: rm ../indexer-results/*
     - name: Run indexer
       run: npm run dev
       env:
-        DATA_DIR: ../data
+        DATA_DIR: ../indexer-results
         RPC_HTTP_HOST: ${{ secrets.RPC_HTTP_HOST }}
         RPC_API_KEY: ""
         IPFS_HTTPS_GATEWAY: ${{ secrets.IPFS_HTTPS_GATEWAY }}
@@ -50,4 +49,4 @@ jobs:
         author_name: neume-network/data bot
         author_email: info@neume.network
         message: 'New results'
-        add: ../data/web3subgraph-transformation
+        add: ../indexer-results/web3subgraph-transformation
