@@ -48,4 +48,5 @@ jobs:
         destination-github-username: 'neume-network'
         destination-repository-name: 'data'
         user-email: info@neume.network
+        target-directory: results
         target-branch: main
