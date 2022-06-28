@@ -39,3 +39,13 @@ jobs:
         EXTRACTION_WORKER_CONCURRENCY: 100
     - run: ls data
     - run: cat data/web3subgraph-transformation
+    - name: Update neume-network/data
+      uses: cpina/github-action-push-to-another-repository@main
+      env:
+        SSH_DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      with:
+        source-directory: 'data'
+        destination-github-username: 'neume-network'
+        destination-repository-name: 'data'
+        user-email: info@neume.network
+        target-branch: main
