@@ -16,10 +16,6 @@ jobs:
     - uses: webfactory/ssh-agent@v0.5.4
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    - name: Checkout neume-network/data repository
-      uses: actions/checkout@v3
-      with:
-        path: data-dir
     - name: Checkout neume-network/core
       uses: actions/checkout@v3
       with:
@@ -32,22 +28,14 @@ jobs:
         cache: 'npm'
     - name: Install neume-network/core dependencies
       run: npm ci
-    - run: ls data-dir
-    - name: Delete old indexing result
-      run: rm data-dir/*
     - name: Run indexer
       run: npm run dev
       env:
-        DATA_DIR: ../indexer-results
+        DATA_DIR: data
         RPC_HTTP_HOST: ${{ secrets.RPC_HTTP_HOST }}
         RPC_API_KEY: ""
         IPFS_HTTPS_GATEWAY: ${{ secrets.IPFS_HTTPS_GATEWAY }}
         IPFS_HTTPS_GATEWAY_KEY: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
         EXTRACTION_WORKER_CONCURRENCY: 100
-    - name: Add data to repository
-      uses: EndBug/add-and-commit@v9
-      with:
-        author_name: neume-network/data bot
-        author_email: info@neume.network
-        message: 'New results'
-        add: ../indexer-results/web3subgraph-transformation
+    - run: ls data
+    - run: cat data/web3subgraph-transformation
