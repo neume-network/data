@@ -32,6 +32,8 @@ jobs:
         cache: 'npm'
     - name: Install neume-network/core dependencies
       run: npm ci
+    - name: Delete old indexing result
+      run: rm data/*
     - name: Run indexer
       run: npm run dev
       env:
@@ -41,3 +43,10 @@ jobs:
         IPFS_HTTPS_GATEWAY: ${{ secrets.IPFS_HTTPS_GATEWAY }}
         IPFS_HTTPS_GATEWAY_KEY: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
         EXTRACTION_WORKER_CONCURRENCY: 100
+    - name: Add data to repository
+      uses: EndBug/add-and-commit@v9
+      with:
+        author_name: neume-network/data bot
+        author_email: info@neume.network
+        message: 'New results'
+        add: data/web3subgraph-transformation
