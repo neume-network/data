@@ -31,7 +31,7 @@ jobs:
     - name: Install neume-network/core dependencies
       run: npm ci
     - name: Run indexer
-      run: DEBUG=neume-network-strategies:* node ./src/boot.mjs
+      run: npm run dev
       env:
         DATA_DIR: data
         RPC_HTTP_HOST: ${{ secrets.RPC_HTTP_HOST }}
