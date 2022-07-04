@@ -38,7 +38,7 @@ jobs:
         RPC_API_KEY: ""
         IPFS_HTTPS_GATEWAY: https://neume.infura-ipfs.io/ipfs/
         IPFS_HTTPS_GATEWAY_KEY: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
-        EXTRACTION_WORKER_CONCURRENCY: 30
+        EXTRACTION_WORKER_CONCURRENCY: 20
     - name: Update neume-network/data
       uses: cpina/github-action-push-to-another-repository@main
       env:
