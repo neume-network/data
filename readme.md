@@ -15,4 +15,5 @@ Since the crawl on GitHub Actions is taking up to two or three hours per run cur
 
 Not all commits in neume-network/core work flawlesly in production. But some do and this is confirmed by e.g. a branch's top commit passing the entire crawl suite. Below are a number of tree states in neume-network/core that pass the entire crawling suite.
 
+- 2022-07-12: https://github.com/neume-network/core/tree/2ff8bd044b0bd4f063c406f558518e01a577c3d4
 - 2022-07-11: https://github.com/neume-network/core/tree/7c4a5b814f77e5e881658d7fadb9794caa160581
