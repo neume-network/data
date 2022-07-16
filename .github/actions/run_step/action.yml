@@ -1,0 +1,82 @@
+name: "Run a step"
+description: "Run a step of the crawl path"
+inputs:
+  ssh-private-key:
+    required: true
+    description: "SSH key to clone and push to repo"
+  rpc-http-host:
+    required: true
+    description: "Ethereum Full Node"
+  ipfs-https-gateway-key:
+    required: true
+    description: "API key for IPFS gateway"
+  push-to-repo:
+    required: false
+    description: "The URL of the Express app"
+    default: false
+  current-step:
+    required: true
+    description: "The step number to execute"
+  previous-step:
+    required: false
+    description: "The previous step number which was executed"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: webfactory/ssh-agent@v0.5.4
+      with:
+        ssh-private-key: ${{ inputs.ssh-private-key }}
+    - name: Download Artifacts
+      if: ${{ inputs.previous-step }}
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{ inputs.previous-step }}
+        path: data
+    - name: Debug
+      run: ls -R
+      working-directory: data
+    - name: Checkout neume-network/core
+      uses: actions/checkout@v3
+      with:
+        repository: neume-network/core
+        ref: dev
+        path: neume-network-core
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14.x
+        cache: 'npm'
+        cache-dependency-path: neume-network-core/package-lock.json
+    - name: Install neume-network/core dependencies
+      working-directory: ./neume-network-core
+      run: npm ci
+    - name: Run indexer
+      run: node neume-network-core/neume.mjs --path neume-network-data/steps/${{ inputs.current-step }}.mjs
+      env:
+        DATA_DIR: data
+        RPC_HTTP_HOST: ${{ inputs.rpc-http-host }}
+        RPC_API_KEY: ""
+        IPFS_HTTPS_GATEWAY: https://neume.infura-ipfs.io/ipfs/
+        IPFS_HTTPS_GATEWAY_KEY: ${{ inputs.ipfs-https-gateway-key }}
+        EXTRACTION_WORKER_CONCURRENCY: 2
+        DEBUG: neume-network-*
+    # Only for debuggin purposes. To be removed later.
+    - name: Upload Artifacts
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ inputs.current-step }}
+        path: data
+    - name: Update neume-network/data
+      if: ${{ inputs.push-to-repo }}
+      uses: cpina/github-action-push-to-another-repository@main
+      env:
+        SSH_DEPLOY_KEY: ${{ inputs.ssh-private-key }}
+      with:
+        source-directory: 'data'
+        destination-github-username: 'neume-network'
+        destination-repository-name: 'data'
+        user-email: info@neume.network
+        target-directory: results
+        target-branch: dev

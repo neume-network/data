@@ -6,47 +6,109 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-
+  job_0:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x]
-
     steps:
-    - uses: webfactory/ssh-agent@v0.5.4
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    - name: Checkout neume-network/core
-      uses: actions/checkout@v3
-      with:
-        repository: neume-network/core
-        ref: main
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - name: Install neume-network/core dependencies
-      run: npm ci
-    - name: Run indexer
-      run: npm run dev
-      env:
-        DATA_DIR: data
-        RPC_HTTP_HOST: ${{ secrets.RPC_HTTP_HOST }}
-        RPC_API_KEY: ""
-        IPFS_HTTPS_GATEWAY: https://neume.infura-ipfs.io/ipfs/
-        IPFS_HTTPS_GATEWAY_KEY: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
-        EXTRACTION_WORKER_CONCURRENCY: 2
-    - name: Update neume-network/data
-      uses: cpina/github-action-push-to-another-repository@main
-      env:
-        SSH_DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      with:
-        source-directory: 'data'
-        destination-github-username: 'neume-network'
-        destination-repository-name: 'data'
-        user-email: info@neume.network
-        target-directory: results
-        target-branch: main
+      - name: Checkout neume-network/data
+        uses: actions/checkout@v3
+        with:
+          ref: dev
+          path: neume-network-data
+      - id: run_step
+        uses: ./neume-network-data/.github/actions/run_step
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          rpc-http-host: ${{ secrets.RPC_HTTP_HOST }}
+          ipfs-https-gateway-key: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
+          current-step: 0
+  job_1:
+    runs-on: ubuntu-latest
+    needs: job_0
+    steps:
+      - name: Checkout neume-network/data
+        uses: actions/checkout@v3
+        with:
+          ref: dev
+          path: neume-network-data
+      - id: run_step
+        uses: ./neume-network-data/.github/actions/run_step
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          rpc-http-host: ${{ secrets.RPC_HTTP_HOST }}
+          ipfs-https-gateway-key: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
+          current-step: 1
+          previous-step: 0
+
+
+  job_2:
+    runs-on: ubuntu-latest
+    needs: job_1
+    steps:
+      - name: Checkout neume-network/data
+        uses: actions/checkout@v3
+        with:
+          ref: dev
+          path: neume-network-data
+      - id: run_step
+        uses: ./neume-network-data/.github/actions/run_step
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          rpc-http-host: ${{ secrets.RPC_HTTP_HOST }}
+          ipfs-https-gateway-key: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
+          current-step: 2
+          previous-step: 1
+  
+  job_3:
+    runs-on: ubuntu-latest
+    needs: job_2
+    steps:
+      - name: Checkout neume-network/data
+        uses: actions/checkout@v3
+        with:
+          ref: dev
+          path: neume-network-data
+      - id: run_step
+        uses: ./neume-network-data/.github/actions/run_step
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          rpc-http-host: ${{ secrets.RPC_HTTP_HOST }}
+          ipfs-https-gateway-key: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
+          current-step: 3
+          previous-step: 2
+          
+  job_4:
+    runs-on: ubuntu-latest
+    needs: job_3
+    steps:
+      - name: Checkout neume-network/data
+        uses: actions/checkout@v3
+        with:
+          ref: dev
+          path: neume-network-data
+      - id: run_step
+        uses: ./neume-network-data/.github/actions/run_step
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          rpc-http-host: ${{ secrets.RPC_HTTP_HOST }}
+          ipfs-https-gateway-key: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
+          current-step: 4
+          previous-step: 3
+          
+  job_5:
+    runs-on: ubuntu-latest
+    needs: job_4
+    steps:
+      - name: Checkout neume-network/data
+        uses: actions/checkout@v3
+        with:
+          ref: dev
+          path: neume-network-data
+      - id: run_step
+        uses: ./neume-network-data/.github/actions/run_step
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          rpc-http-host: ${{ secrets.RPC_HTTP_HOST }}
+          ipfs-https-gateway-key: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
+          current-step: 5
+          previous-step: 4
+          push-to-repo: true
