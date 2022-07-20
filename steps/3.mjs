@@ -10,12 +10,5 @@ export default [
       },
       transformer: {},
     },
-    {
-      name: "zora-call-tokenmetadatauri",
-      extractor: {
-        args: [resolve(env.DATA_DIR, "web3subgraph-transformation")],
-      },
-      transformer: {},
-    },
   ],
 ];

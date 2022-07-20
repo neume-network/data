@@ -12,8 +12,7 @@ inputs:
     description: "API key for IPFS gateway"
   push-to-repo:
     required: false
-    description: "The URL of the Express app"
-    default: false
+    description: "If true the data will be pushed to repo"
   current-step:
     required: true
     description: "The step number to execute"
@@ -33,9 +32,6 @@ runs:
       with:
         name: ${{ inputs.previous-step }}
         path: data
-    - name: Debug
-      run: ls -R
-      working-directory: data
     - name: Checkout neume-network/core
       uses: actions/checkout@v3
       with:
@@ -51,8 +47,10 @@ runs:
     - name: Install neume-network/core dependencies
       working-directory: ./neume-network-core
       run: npm ci
+      shell: bash
     - name: Run indexer
       run: node neume-network-core/neume.mjs --path neume-network-data/steps/${{ inputs.current-step }}.mjs
+      shell: bash
       env:
         DATA_DIR: data
         RPC_HTTP_HOST: ${{ inputs.rpc-http-host }}
