@@ -59,7 +59,6 @@ runs:
         IPFS_HTTPS_GATEWAY_KEY: ${{ inputs.ipfs-https-gateway-key }}
         EXTRACTION_WORKER_CONCURRENCY: 2
         DEBUG: neume-network-*
-    # Only for debuggin purposes. To be removed later.
     - name: Upload Artifacts
       if: always()
       uses: actions/upload-artifact@v3
