@@ -12,7 +12,7 @@ jobs:
       - name: Checkout neume-network/data
         uses: actions/checkout@v3
         with:
-          ref: dev
+          ref: main
           path: neume-network-data
       - name: Run a crawler step
         id: run_step
@@ -30,7 +30,7 @@ jobs:
       - name: Checkout neume-network/data
         uses: actions/checkout@v3
         with:
-          ref: dev
+          ref: main
           path: neume-network-data
       - name: Run a crawler step
         id: run_step
@@ -50,7 +50,7 @@ jobs:
       - name: Checkout neume-network/data
         uses: actions/checkout@v3
         with:
-          ref: dev
+          ref: main
           path: neume-network-data
       - name: Run a crawler step
         id: run_step
@@ -69,7 +69,7 @@ jobs:
       - name: Checkout neume-network/data
         uses: actions/checkout@v3
         with:
-          ref: dev
+          ref: main
           path: neume-network-data
       - name: Run a crawler step
         id: run_step
@@ -88,7 +88,7 @@ jobs:
       - name: Checkout neume-network/data
         uses: actions/checkout@v3
         with:
-          ref: dev
+          ref: main
           path: neume-network-data
       - name: Run a crawler step
         id: run_step
@@ -107,7 +107,7 @@ jobs:
       - name: Checkout neume-network/data
         uses: actions/checkout@v3
         with:
-          ref: dev
+          ref: main
           path: neume-network-data
       - name: Run a crawler step
         id: run_step
@@ -126,7 +126,7 @@ jobs:
       - name: Checkout neume-network/data
         uses: actions/checkout@v3
         with:
-          ref: dev
+          ref: main
           path: neume-network-data
       - name: Run a crawler step
         id: run_step
