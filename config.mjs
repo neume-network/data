@@ -4,7 +4,7 @@ export default {
   endpoints: {
     [env.RPC_HTTP_HOST]: {
       timeout: 10000,
-      requestsPerUnit: 12,
+      requestsPerUnit: 8,
       unit: "second",
     },
     "https://metadata.sound.xyz": {
