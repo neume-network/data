@@ -1,9 +1,10 @@
 export default [
   [
     {
-      name: "web3subgraph",
-      extractor: {},
-      transformer: {},
+      name: "call-block-logs",
+      extractor: {
+        args: [11565020, 15283124],
+      },
     },
   ],
 ];
