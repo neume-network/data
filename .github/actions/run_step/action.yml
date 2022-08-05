@@ -57,7 +57,7 @@ runs:
         RPC_API_KEY: ""
         IPFS_HTTPS_GATEWAY: https://neume.infura-ipfs.io/ipfs/
         IPFS_HTTPS_GATEWAY_KEY: ${{ inputs.ipfs-https-gateway-key }}
-        EXTRACTION_WORKER_CONCURRENCY: 2
+        EXTRACTION_WORKER_CONCURRENCY: 8
         DEBUG: neume-network-*
     - name: Upload Artifacts
       if: always()
