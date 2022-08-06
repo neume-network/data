@@ -36,7 +36,7 @@ runs:
       uses: actions/checkout@v3
       with:
         repository: neume-network/core
-        ref: main
+        ref: ${{ github.ref_name }}
         path: neume-network-core
     - name: Use Node.js 14.x
       uses: actions/setup-node@v3
@@ -49,7 +49,7 @@ runs:
       run: npm ci
       shell: bash
     - name: Run indexer
-      run: node neume-network-core/neume.mjs --path neume-network-data/steps/${{ inputs.current-step }}.mjs
+      run: node neume-network-core/neume.mjs --path neume-network-data/steps/${{ inputs.current-step }}.mjs --config neume-network-data/config.mjs
       shell: bash
       env:
         DATA_DIR: data
@@ -57,7 +57,7 @@ runs:
         RPC_API_KEY: ""
         IPFS_HTTPS_GATEWAY: https://neume.infura-ipfs.io/ipfs/
         IPFS_HTTPS_GATEWAY_KEY: ${{ inputs.ipfs-https-gateway-key }}
-        EXTRACTION_WORKER_CONCURRENCY: 2
+        EXTRACTION_WORKER_CONCURRENCY: 80
         DEBUG: neume-network-*
     - name: Upload Artifacts
       if: always()
@@ -76,4 +76,4 @@ runs:
         destination-repository-name: 'data'
         user-email: info@neume.network
         target-directory: results
-        target-branch: main
+        target-branch: ${{ github.ref_name }}
