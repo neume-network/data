@@ -1,6 +1,11 @@
 import { env } from "process";
 
 export default {
+  queue: {
+    options: {
+      concurrent: 10,
+    },
+  },
   endpoints: {
     [env.RPC_HTTP_HOST]: {
       timeout: 25000,
