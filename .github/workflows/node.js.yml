@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  job_0:
+  web3subgraph:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout neume-network/data
@@ -22,9 +22,9 @@ jobs:
           ipfs-https-gateway-key: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
           current-step: 0
 
-  job_1:
+  soundxyz-call-tokenuri:
     runs-on: ubuntu-latest
-    needs: job_0
+    needs: web3subgraph
     steps:
       - name: Checkout neume-network/data
         uses: actions/checkout@v3
@@ -41,9 +41,9 @@ jobs:
           previous-step: 0
 
 
-  job_2:
+  soundxyz-get-tokenuri:
     runs-on: ubuntu-latest
-    needs: job_1
+    needs: soundxyz-call-tokenuri
     steps:
       - name: Checkout neume-network/data
         uses: actions/checkout@v3
@@ -59,9 +59,9 @@ jobs:
           current-step: 2
           previous-step: 1
   
-  job_3:
+  zora-call-tokenuri:
     runs-on: ubuntu-latest
-    needs: job_2
+    needs: soundxyz-get-tokenuri
     steps:
       - name: Checkout neume-network/data
         uses: actions/checkout@v3
@@ -77,9 +77,9 @@ jobs:
           current-step: 3
           previous-step: 2
           
-  job_4:
+  zora-call-tokenmetadatauri:
     runs-on: ubuntu-latest
-    needs: job_3
+    needs: zora-call-tokenuri
     steps:
       - name: Checkout neume-network/data
         uses: actions/checkout@v3
@@ -95,9 +95,9 @@ jobs:
           current-step: 4
           previous-step: 3
           
-  job_5:
+  zora-get-tokenuri:
     runs-on: ubuntu-latest
-    needs: job_4
+    needs: zora-call-tokenmetadatauri
     steps:
       - name: Checkout neume-network/data
         uses: actions/checkout@v3
@@ -113,9 +113,9 @@ jobs:
           current-step: 5
           previous-step: 4
 
-  job_6:
+  music-os-accumulator:
     runs-on: ubuntu-latest
-    needs: job_5
+    needs: zora-get-tokenuri
     steps:
       - name: Checkout neume-network/data
         uses: actions/checkout@v3
