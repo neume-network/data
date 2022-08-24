@@ -67,7 +67,7 @@ runs:
         path: data
     - name: Update neume-network/data
       if: ${{ inputs.push-to-repo }}
-      uses: cpina/github-action-push-to-another-repository@main
+      uses: neume-network/github-action-push-to-another-repository@feat/58-keep-files-in-target-dir
       env:
         SSH_DEPLOY_KEY: ${{ inputs.ssh-private-key }}
       with:
@@ -77,3 +77,4 @@ runs:
         user-email: info@neume.network
         target-directory: results
         target-branch: ${{ github.ref_name }}
+        target-directory-ignored-file-name: 'call-block-logs-transformation'
