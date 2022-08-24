@@ -76,5 +76,5 @@ runs:
         destination-repository-name: 'data'
         user-email: info@neume.network
         target-directory: results
-        target-branch: 'test'
+        target-branch: ${{ github.ref_name }}
         target-directory-ignored-file-name: 'call-block-logs-transformation'
