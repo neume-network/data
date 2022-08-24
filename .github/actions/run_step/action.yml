@@ -77,4 +77,4 @@ runs:
         user-email: info@neume.network
         target-directory: results
         target-branch: 'test'
-        target-directory-ignored-file-name: call-block-logs-transformation
+        target-directory-ignored-file-name: 'call-block-logs-transformation'
