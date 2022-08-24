@@ -10,7 +10,7 @@ jobs:
       - uses: webfactory/ssh-agent@v0.5.4
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - run: mkdir -p ~/.ssh/ && ssh-keyscan -H $node.rugpullindex.com >> ~/.ssh/known_hosts
+      - run: mkdir -p ~/.ssh/ && ssh-keyscan -H node.rugpullindex.com >> ~/.ssh/known_hosts
       - name: "Clone neume-network/data on remote server"
         run: ssh root@node.rugpullindex.com "git clone git@github.com:neume-network/data.git"
       - name: "Generate a block logs crawl path"
