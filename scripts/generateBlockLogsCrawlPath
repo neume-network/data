@@ -1,0 +1,7 @@
+#!/bin/bash
+lastBlockNumber="$(./lastBlockNumber)"
+blockNumber="$(./blockNumber)"
+printf \
+  'export default [[{name: "web3subgraph",extractor: {args: ["%s", "%s"]},transformer: {},},],];' \
+  $lastBlockNumber $blockNumber
+
