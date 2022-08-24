@@ -36,7 +36,7 @@ runs:
       uses: actions/checkout@v3
       with:
         repository: neume-network/core
-        ref: ${{ github.ref_name }}
+        ref: 'main'
         path: neume-network-core
     - name: Use Node.js 14.x
       uses: actions/setup-node@v3
@@ -76,5 +76,5 @@ runs:
         destination-repository-name: 'data'
         user-email: info@neume.network
         target-directory: results
-        target-branch: ${{ github.ref_name }}
+        target-branch: 'test'
         target-directory-ignored-file-name: call-block-logs-transformation
