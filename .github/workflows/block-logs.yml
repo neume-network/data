@@ -20,7 +20,7 @@ jobs:
       - name: "Run partial block logs crawl"
         run: ssh root@node.rugpullindex.com "cd core && npm run dev"
       - name: "Copy results to local repository"
-        run: ssh root@node.rugpullindex.com "cp core/data/call-block-logs-transformation data/results/call-block-logs-transformation"
+        run: ssh root@node.rugpullindex.com "cat core/data/call-block-logs-transformation >> data/results/call-block-logs-transformation"
       - name: "Upload to remote"
         run: ssh root@node.rugpullindex.com "cd data && git add results/call-block-logs-transformation && git commit -m 'update' && git push origin main"
 
