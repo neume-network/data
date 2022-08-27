@@ -19,8 +19,12 @@ jobs:
         run: ssh root@node.rugpullindex.com "cd data/scripts && chmod +x * && ./generateBlockLogsCrawlPath > ../../core/crawl_path.mjs"
       - name: "Run partial block logs crawl"
         run: ssh root@node.rugpullindex.com "cd core && npm run dev"
+      - name: "Remove potentially outdated remote"
+        run: ssh root@node.rugpullindex.com "rm -rf data"
+      - name: "And download remote again again"
+        run: ssh root@node.rugpullindex.com "git clone git@github.com:neume-network/data.git"
       - name: "Copy results to local repository"
         run: ssh root@node.rugpullindex.com "cat core/data/call-block-logs-transformation >> data/results/call-block-logs-transformation"
       - name: "Upload to remote"
-        run: ssh root@node.rugpullindex.com "cd data && git add results/call-block-logs-transformation && git commit -m 'update' && git push origin main"
+        run: ssh root@node.rugpullindex.com "cd data && git add results/call-block-logs-transformation && git commit -m 'Update from call-block-logs-transformation' && git push origin main"
 
