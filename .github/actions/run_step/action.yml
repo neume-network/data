@@ -26,11 +26,9 @@ runs:
     - uses: webfactory/ssh-agent@v0.5.4
       with:
         ssh-private-key: ${{ inputs.ssh-private-key }}
-    - name: Download Artifacts
-      if: ${{ inputs.previous-step }}
-      uses: actions/download-artifact@v3
+    - name: Checkout neume-network/data
+      uses: actions/checkout@v3
       with:
-        name: ${{ inputs.previous-step }}
         path: data
     - name: Checkout neume-network/core
       uses: actions/checkout@v3
@@ -42,7 +40,7 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: 14.x
-        cache: 'npm'
+        cache: "npm"
         cache-dependency-path: neume-network-core/package-lock.json
     - name: Install neume-network/core dependencies
       working-directory: ./neume-network-core
@@ -59,6 +57,9 @@ runs:
         IPFS_HTTPS_GATEWAY_KEY: ${{ inputs.ipfs-https-gateway-key }}
         EXTRACTION_WORKER_CONCURRENCY: 80
         DEBUG: neume-network-*
+    - name: Delete call-block-logs-extraction
+      if: ${{ inputs.current-step == 0 }}
+      run: rm data/call-block-logs-extraction
     - name: Upload Artifacts
       if: always()
       uses: actions/upload-artifact@v3
@@ -71,9 +72,9 @@ runs:
       env:
         SSH_DEPLOY_KEY: ${{ inputs.ssh-private-key }}
       with:
-        source-directory: 'data'
-        destination-github-username: 'neume-network'
-        destination-repository-name: 'data'
+        source-directory: "data"
+        destination-github-username: "neume-network"
+        destination-repository-name: "data"
         user-email: info@neume.network
         target-directory: results
         target-branch: ${{ github.ref_name }}
