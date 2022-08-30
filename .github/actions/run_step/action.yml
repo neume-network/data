@@ -33,10 +33,14 @@ runs:
         name: ${{ inputs.previous-step }}
         path: data
     - name: Checkout neume-network/data
-      if: ${{ inputs.current-step == 0}}
+      if: ${{ inputs.current-step == 0 }}
       uses: actions/checkout@v3
       with:
         path: data
+    - name: Move files from results folder
+      if: ${{ inputs.current-step == 0 }}
+      shell: bash
+      run: ls | grep -xv "results" | xargs rm -rf && mv results/* . && rm -rf results
     - name: Checkout neume-network/core
       uses: actions/checkout@v3
       with:
