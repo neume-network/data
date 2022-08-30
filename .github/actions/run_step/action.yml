@@ -27,7 +27,7 @@ runs:
       with:
         ssh-private-key: ${{ inputs.ssh-private-key }}
     - name: Download Artifacts
-      if: ${{ inputs.previous-step }}
+      if: ${{ inputs.current-step != 0 }}
       uses: actions/download-artifact@v3
       with:
         name: ${{ inputs.previous-step }}

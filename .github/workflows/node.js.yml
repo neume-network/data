@@ -40,6 +40,7 @@ jobs:
           rpc-http-host: ${{ secrets.RPC_HTTP_HOST }}
           ipfs-https-gateway-key: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
           current-step: 1
+          previous-step: 0
 
   soundxyz-call-tokenuri:
     runs-on: ubuntu-latest
