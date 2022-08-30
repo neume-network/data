@@ -39,6 +39,7 @@ runs:
         path: data
     - name: Move files from results folder
       if: ${{ inputs.current-step == 0 }}
+      working-directory: data
       shell: bash
       run: ls | grep -xv "results" | xargs rm -rf && mv results/* . && rm -rf results
     - name: Checkout neume-network/core
