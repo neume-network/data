@@ -26,7 +26,7 @@ jobs:
 
   soundxyz-call-tokenuri:
     runs-on: ubuntu-latest
-    needs: web3subgraph
+    needs: call-block-logs
     steps:
       - name: Checkout neume-network/data
         uses: actions/checkout@v3
