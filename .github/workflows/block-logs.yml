@@ -1,7 +1,7 @@
 name: call-block-logs
 on:
-  schedule: 
-    - cron:  '10 * * * *'
+  schedule:
+    - cron: "10 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -28,4 +28,3 @@ jobs:
         run: ssh root@node.rugpullindex.com "cat core/data/call-block-logs-transformation >> data/results/call-block-logs-transformation"
       - name: "Upload to remote"
         run: ssh root@node.rugpullindex.com "cd data && git add results/call-block-logs-transformation && git commit -m 'Update from call-block-logs-transformation' && git push origin main"
-

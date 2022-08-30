@@ -1,5 +1,5 @@
 #!/bin/bash
 curl -s https://cloudflare-eth.com/v1/mainnet -X POST \
-  --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":83}' 2>&1 |\
+  --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' 2>&1 |\
 grep -o '"result":"[^"]*' |\
 grep -o '[^"]*$'
