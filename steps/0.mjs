@@ -1,7 +1,8 @@
 export default [
   [
     {
-      name: "web3subgraph",
+      // this will get overwritten
+      name: "call-block-logs",
       extractor: {},
       transformer: {},
     },

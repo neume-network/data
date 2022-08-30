@@ -6,7 +6,7 @@ export default [
     {
       name: "soundxyz-call-tokenuri",
       extractor: {
-        args: [resolve(env.DATA_DIR, "web3subgraph-transformation")],
+        args: [resolve(env.DATA_DIR, "logs-to-subgraph-transformation")],
       },
       transformer: {},
     },
