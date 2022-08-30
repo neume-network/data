@@ -2,7 +2,7 @@
 # To get the last ten lines of the transformation file, we're using tail with
 # n=default, then grep a line that contains a blockNumber, match its content and
 # then extract the last value from the pipe.
-tail ../results/call-block-logs-transformation |\
+tail ../results/logs-to-subgraph-transformation |\
 grep -o '"blockNumber":"[^"]*' |\
 grep -o '[^"]*$' |\
 tail -1
