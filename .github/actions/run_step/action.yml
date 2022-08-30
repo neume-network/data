@@ -26,7 +26,14 @@ runs:
     - uses: webfactory/ssh-agent@v0.5.4
       with:
         ssh-private-key: ${{ inputs.ssh-private-key }}
+    - name: Download Artifacts
+      if: ${{ inputs.previous-step }}
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{ inputs.previous-step }}
+        path: data
     - name: Checkout neume-network/data
+      if: ${{ inputs.current-step == 0}}
       uses: actions/checkout@v3
       with:
         path: data
@@ -59,6 +66,7 @@ runs:
         DEBUG: neume-network-*
     - name: Delete call-block-logs-extraction
       if: ${{ inputs.current-step == 0 }}
+      shell: bash
       run: rm data/call-block-logs-extraction
     - name: Upload Artifacts
       if: always()
