@@ -62,7 +62,10 @@ runs:
     - name: Delete call-block-logs-extraction
       if: ${{ inputs.current-step == 0 }}
       shell: bash
-      run: rm data/call-block-logs-extraction && test -f data/call-block-logs-transformation && mv data/call-block-logs-transformation data/logs-to-subgraph-extraction
+      run: |
+        rm data/call-block-logs-extraction && \
+        test -f data/call-block-logs-transformation && \
+        mv data/call-block-logs-transformation data/logs-to-subgraph-extraction
     - name: Upload Artifacts
       if: always()
       uses: actions/upload-artifact@v3
@@ -73,20 +76,20 @@ runs:
       if: ${{ inputs.push-to-repo }}
       shell: bash
       run: |
-        [ -f data/call-block-logs-transformation            ] && cat data/call-block-logs-transformation            >> neume-network-data/call-block-logs-transformation
-        [ -f data/logs-to-subgraph-transformation           ] && cat data/logs-to-subgraph-transformation           >> neume-network-data/logs-to-subgraph-transformation
-        [ -f data/music-os-accumulator-extraction           ] && cat data/music-os-accumulator-extraction           >> neume-network-data/music-os-accumulator-extraction
-        [ -f data/soundxyz-call-tokenuri-extraction         ] && cat data/soundxyz-call-tokenuri-extraction         >> neume-network-data/soundxyz-call-tokenuri-extraction
-        [ -f data/soundxyz-call-tokenuri-transformation     ] && cat data/soundxyz-call-tokenuri-transformation     >> neume-network-data/soundxyz-call-tokenuri-transformation
-        [ -f data/soundxyz-get-tokenuri-extraction          ] && cat data/soundxyz-get-tokenuri-extraction          >> neume-network-data/soundxyz-get-tokenuri-extraction
-        [ -f data/soundxyz-get-tokenuri-transformation      ] && cat data/soundxyz-get-tokenuri-transformation      >> neume-network-data/soundxyz-get-tokenuri-transformation
-        [ -f data/soundxyz-metadata-extraction              ] && cat data/soundxyz-metadata-extraction              >> neume-network-data/soundxyz-metadata-extraction
-        [ -f data/soundxyz-metadata-transformation          ] && cat data/soundxyz-metadata-transformation          >> neume-network-data/soundxyz-metadata-transformation
-        [ -f data/zora-call-tokenmetadatauri-extraction     ] && cat data/zora-call-tokenmetadatauri-extraction     >> neume-network-data/zora-call-tokenmetadatauri-extraction
-        [ -f data/zora-call-tokenmetadatauri-transformation ] && cat data/zora-call-tokenmetadatauri-transformation >> neume-network-data/zora-call-tokenmetadatauri-transformation
-        [ -f data/zora-call-tokenuri-extraction             ] && cat data/zora-call-tokenuri-extraction             >> neume-network-data/zora-call-tokenuri-extraction
-        [ -f data/zora-get-tokenuri-extraction              ] && cat data/zora-get-tokenuri-extraction              >> neume-network-data/zora-get-tokenuri-extraction
-        [ -f data/zora-get-tokenuri-transformation          ] && cat data/zora-get-tokenuri-transformation          >> neume-network-data/zora-get-tokenuri-transformation
+        test -f data/call-block-logs-transformation            && cat data/call-block-logs-transformation            >> neume-network-data/call-block-logs-transformation            && \
+        test -f data/logs-to-subgraph-transformation           && cat data/logs-to-subgraph-transformation           >> neume-network-data/logs-to-subgraph-transformation           && \
+        test -f data/music-os-accumulator-extraction           && cat data/music-os-accumulator-extraction           >> neume-network-data/music-os-accumulator-extraction           && \
+        test -f data/soundxyz-call-tokenuri-extraction         && cat data/soundxyz-call-tokenuri-extraction         >> neume-network-data/soundxyz-call-tokenuri-extraction         && \
+        test -f data/soundxyz-call-tokenuri-transformation     && cat data/soundxyz-call-tokenuri-transformation     >> neume-network-data/soundxyz-call-tokenuri-transformation     && \
+        test -f data/soundxyz-get-tokenuri-extraction          && cat data/soundxyz-get-tokenuri-extraction          >> neume-network-data/soundxyz-get-tokenuri-extraction          && \
+        test -f data/soundxyz-get-tokenuri-transformation      && cat data/soundxyz-get-tokenuri-transformation      >> neume-network-data/soundxyz-get-tokenuri-transformation      && \
+        test -f data/soundxyz-metadata-extraction              && cat data/soundxyz-metadata-extraction              >> neume-network-data/soundxyz-metadata-extraction              && \
+        test -f data/soundxyz-metadata-transformation          && cat data/soundxyz-metadata-transformation          >> neume-network-data/soundxyz-metadata-transformation          && \
+        test -f data/zora-call-tokenmetadatauri-extraction     && cat data/zora-call-tokenmetadatauri-extraction     >> neume-network-data/zora-call-tokenmetadatauri-extraction     && \
+        test -f data/zora-call-tokenmetadatauri-transformation && cat data/zora-call-tokenmetadatauri-transformation >> neume-network-data/zora-call-tokenmetadatauri-transformation && \
+        test -f data/zora-call-tokenuri-extraction             && cat data/zora-call-tokenuri-extraction             >> neume-network-data/zora-call-tokenuri-extraction             && \
+        test -f data/zora-get-tokenuri-extraction              && cat data/zora-get-tokenuri-extraction              >> neume-network-data/zora-get-tokenuri-extraction              && \
+        test -f data/zora-get-tokenuri-transformation          && cat data/zora-get-tokenuri-transformation          >> neume-network-data/zora-get-tokenuri-transformation
     - name: Update neume-network/data
       if: ${{ inputs.push-to-repo }}
       uses: neume-network/github-action-push-to-another-repository@feat/58-keep-files-in-target-dir
