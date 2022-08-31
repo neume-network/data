@@ -2,5 +2,5 @@
 lastBlockNumber="$(./lastBlockNumber)"
 blockNumber="$(./blockNumber)"
 printf \
-  'export default [[{name: "call-block-logs",extractor: {args: [15447308, 15447310]},transformer: {},},],];' \
+  'export default [[{name: "call-block-logs",extractor: {args: [15446891 , 15446894]},transformer: {},},],];' \
 
