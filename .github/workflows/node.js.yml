@@ -23,7 +23,6 @@ jobs:
           rpc-http-host: ${{ secrets.RPC_HTTP_HOST }}
           ipfs-https-gateway-key: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
           current-step: 0
-          push-to-repo: true
 
   logs-to-subgraph:
     runs-on: ubuntu-latest
