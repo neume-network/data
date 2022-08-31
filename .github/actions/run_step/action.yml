@@ -64,7 +64,7 @@ runs:
       shell: bash
       run: |
         rm data/call-block-logs-extraction
-        [ ! -f data/call-blog-logs-transformation ] && mv data/call-block-logs-transformation data/logs-to-subgraph-extraction
+        [ ! -f data/call-blog-logs-transformation ] || mv data/call-block-logs-transformation data/logs-to-subgraph-extraction
     - name: Upload Artifacts
       if: always()
       uses: actions/upload-artifact@v3
