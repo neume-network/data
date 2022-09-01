@@ -92,7 +92,7 @@ runs:
         test -f data/zora-get-tokenuri-transformation          && cat data/zora-get-tokenuri-transformation          >> neume-network-data/zora-get-tokenuri-transformation
     - name: Update neume-network/data
       if: ${{ inputs.push-to-repo }}
-      uses: neume-network/github-action-push-to-another-repository@feat/58-keep-files-in-target-dir
+      uses: cpina/github-action-push-to-another-repository@main
       env:
         SSH_DEPLOY_KEY: ${{ inputs.ssh-private-key }}
       with:
