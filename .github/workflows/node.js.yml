@@ -24,12 +24,6 @@ jobs:
           cd ../..
         env:
           DATA_DIR: data
-      - name: "Get old soundxyz-filter-contracts-transformation"
-        run: |
-          mkdir data && \
-          cp \
-          neume-network-data/results/soundxyz-filter-contracts-transformation \
-          data/soundxyz-filter-contracts-transformation
       - name: Checkout neume-network/core
         uses: actions/checkout@v3
         with:
