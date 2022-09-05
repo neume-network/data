@@ -2,7 +2,7 @@ name: Index data
 
 on:
   schedule:
-    - cron: "0 13 * * *"
+    - cron: "*/30 * * * *"
   workflow_dispatch:
 
 jobs:
