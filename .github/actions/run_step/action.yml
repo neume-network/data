@@ -49,7 +49,10 @@ runs:
       run: npm ci
       shell: bash
     - name: Run indexer
-      run: node neume-network-core/neume.mjs --path neume-network-data/steps/${{ inputs.current-step }}.mjs --config neume-network-data/config.mjs
+      run: |
+        node neume-network-core/neume.mjs \
+        --path neume-network-data/steps/${{ inputs.current-step }}.mjs \
+        --config neume-network-data/config.mjs
       shell: bash
       env:
         DATA_DIR: data
@@ -75,6 +78,7 @@ runs:
       shell: bash
       run: |
         test -f data/call-block-logs-transformation            && cat data/call-block-logs-transformation            >> neume-network-data/call-block-logs-transformation            && \
+        test -f data/soundxyz-filter-contracts-transformation  && cat data/soundxyz-filter-contracts-transformation  >> neume-network-data/soundxyz-filter-contracts-transformation  && \
         test -f data/logs-to-subgraph-transformation           && cat data/logs-to-subgraph-transformation           >> neume-network-data/logs-to-subgraph-transformation           && \
         test -f data/music-os-accumulator-extraction           && cat data/music-os-accumulator-extraction           >> neume-network-data/music-os-accumulator-extraction           && \
         test -f data/soundxyz-call-tokenuri-extraction         && cat data/soundxyz-call-tokenuri-extraction         >> neume-network-data/soundxyz-call-tokenuri-extraction         && \

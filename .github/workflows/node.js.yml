@@ -14,7 +14,11 @@ jobs:
         with:
           path: neume-network-data
       - name: "Generate a block logs crawl path"
-        run: cd ./neume-network-data/scripts && chmod +x * && ./generateBlockLogsCrawlPath > ../steps/0.mjs && cd ../..
+        run: |
+          cd ./neume-network-data/scripts && \
+          chmod +x * && \
+          ./generateBlockLogsCrawlPath > ../steps/call-block-logs-generated.mjs && |
+          cd ../..
       - name: Run a crawler step
         id: run_step
         uses: ./neume-network-data/.github/actions/run_step

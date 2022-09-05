@@ -1,6 +1,10 @@
 #!/bin/bash
-lastBlockNumber="$(./lastBlockNumber)"
-blockNumber="$(./blockNumber)"
-printf \
-  'export default [[{name: "call-block-logs",extractor: {args: [%d, %d]}},],];' \
-  $lastBlockNumber $blockNumber
+# $(()) parses a hexadecimal number to a decimal
+lastBlockNumber=$(($(./lastBlockNumber)));
+blockNumber=$(($(./blockNumber)));
+step0="[{name: \"call-block-logs\",extractor: {args: [${lastBlockNumber}, ${blockNumber}]}}]";
+artistRegistry="0x78e3adc0e811e4f93bd9f1f9389b923c9a3355c2";
+artistCreateEvent="0x23748b43b77f98380e738976c6324996908ffc1989994dd3c68631c87a65a7c0";
+step1="[{name: \"soundxyz-filter-contracts\",transformer: {args: [\"${artistRegistry}\", \"${artistCreateEvent}\"]}}]";
+crawlpath="export default [${step0}, ${step1}];";
+echo $crawlpath;
