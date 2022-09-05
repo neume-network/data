@@ -23,7 +23,7 @@ export function ingestFile(name, mainObj = {}) {
   // NOTE: We don't want this function to have side effects as e.g. mutating
   // `mainObj`'s properties which is why we copy it.
   let copyObj = { ...mainObj };
-  const content = readFileSync(resolve(env.DATA_DIR, name)).toString();
+  const content = readFileSync(resolve(name)).toString();
   const lines = content.split("\n").filter((line) => !!line);
 
   for (const line of lines) {
@@ -40,7 +40,7 @@ export default [[
     transformer: {
       args: [
         ingestFile(
-          "soundxyz-filter-contracts-transformation",
+          "neume-network-data/results/soundxyz-filter-contracts-transformation",
           platformAddresses
         ),
       ],
