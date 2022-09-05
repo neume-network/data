@@ -63,9 +63,7 @@ runs:
       if: ${{ inputs.current-step == 0 }}
       shell: bash
       run: |
-        rm data/call-block-logs-extraction && \
-        test -f data/call-block-logs-transformation && \
-        mv data/call-block-logs-transformation data/logs-to-subgraph-extraction
+        rm data/call-block-logs-extraction
     - name: Upload Artifacts
       if: always()
       uses: actions/upload-artifact@v3
