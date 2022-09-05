@@ -2,8 +2,6 @@ import { readFileSync } from "fs";
 import { resolve } from "path";
 import { env } from "process";
 
-import crawlpath from "./call-block-logs-generated.mjs";
-
 const platformAddresses = {
   "0xabefbc9fd2f806065b4f3c237d4b59d9a97bcac7": {
     name: "zora",
@@ -37,7 +35,6 @@ export function ingestFile(name, mainObj = {}) {
 }
 
 export default [
-  ...crawlpath,
   {
     name: "call-block-logs",
     transformer: {
