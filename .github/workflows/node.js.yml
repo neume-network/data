@@ -26,6 +26,7 @@ jobs:
           DATA_DIR: data
       - name: "Get old soundxyz-filter-contracts-transformation"
         run: |
+          mkdir data && \
           cp \
           neume-network-data/results/soundxyz-filter-contracts-transformation \
           data/soundxyz-filter-contracts-transformation
