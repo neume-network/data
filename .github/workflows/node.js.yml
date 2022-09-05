@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  call-block-logs:
+  index:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout neume-network/data
@@ -17,142 +17,91 @@ jobs:
         run: |
           cd ./neume-network-data/scripts && \
           chmod +x * && \
-          ./generateBlockLogsCrawlPath > ../steps/call-block-logs-generated.mjs && |
+          ./generateBlockLogsCrawlPath > ../steps/0.mjs && |
           cd ../..
         env:
           DATA_DIR: data
-      - name: Run a crawler step
-        id: run_step
-        uses: ./neume-network-data/.github/actions/run_step
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          rpc-http-host: ${{ secrets.RPC_HTTP_HOST }}
-          ipfs-https-gateway-key: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
-          current-step: 0
-
-  logs-to-subgraph:
-    runs-on: ubuntu-latest
-    needs: call-block-logs
-    steps:
-      - name: Checkout neume-network/data
+      - name: Checkout neume-network/core
         uses: actions/checkout@v3
         with:
-          path: neume-network-data
-      - name: Run a crawler step
-        id: run_step
-        uses: ./neume-network-data/.github/actions/run_step
+          repository: neume-network/core
+          ref: ${{ github.ref_name }}
+          path: neume-network-core
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v3
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          rpc-http-host: ${{ secrets.RPC_HTTP_HOST }}
-          ipfs-https-gateway-key: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
-          current-step: 1
-          previous-step: 0
-
-  soundxyz-call-tokenuri:
-    runs-on: ubuntu-latest
-    needs: logs-to-subgraph
-    steps:
-      - name: Checkout neume-network/data
-        uses: actions/checkout@v3
+          node-version: 14.x
+          cache: "npm"
+          cache-dependency-path: neume-network-core/package-lock.json
+      - name: Install neume-network/core dependencies
+        working-directory: ./neume-network-core
+        run: npm ci
+        shell: bash
+      - name: Run steps
+        run: |
+          node neume-network-core/neume.mjs \
+          --path neume-network-data/steps/0.mjs \
+          --config neume-network-data/config.mjs && \
+          node neume-network-core/neume.mjs \
+          --path neume-network-data/steps/1.mjs \
+          --config neume-network-data/config.mjs && \
+          node neume-network-core/neume.mjs \
+          --path neume-network-data/steps/2.mjs \
+          --config neume-network-data/config.mjs && \
+          node neume-network-core/neume.mjs \
+          --path neume-network-data/steps/3.mjs \
+          --config neume-network-data/config.mjs && \
+          node neume-network-core/neume.mjs \
+          --path neume-network-data/steps/4.mjs \
+          --config neume-network-data/config.mjs && \
+          node neume-network-core/neume.mjs \
+          --path neume-network-data/steps/5.mjs \
+          --config neume-network-data/config.mjs && \
+          node neume-network-core/neume.mjs \
+          --path neume-network-data/steps/6.mjs \
+          --config neume-network-data/config.mjs && \
+          node neume-network-core/neume.mjs \
+          --path neume-network-data/steps/7.mjs \
+          --config neume-network-data/config.mjs && \
+          node neume-network-core/neume.mjs \
+          --path neume-network-data/steps/8.mjs \
+          --config neume-network-data/config.mjs
+        shell: bash
+        env:
+          DATA_DIR: data
+          RPC_HTTP_HOST: ${{ secrets.RPC_HTTP_HOST }}
+          RPC_API_KEY: ""
+          IPFS_HTTPS_GATEWAY: https://neume.infura-ipfs.io/ipfs/
+          IPFS_HTTPS_GATEWAY_KEY: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
+          EXTRACTION_WORKER_CONCURRENCY: 80
+          DEBUG: neume-network-*
+      - name: Update neume-network/data files
+        shell: bash
+        run: |
+          test -f data/call-block-logs-extraction                && rm data/call-block-logs-extraction && \
+          test -f data/call-block-logs-transformation            && cat data/call-block-logs-transformation            >> neume-network-data/call-block-logs-transformation            && \
+          test -f data/soundxyz-filter-contracts-transformation  && cat data/soundxyz-filter-contracts-transformation  >> neume-network-data/soundxyz-filter-contracts-transformation  && \
+          test -f data/logs-to-subgraph-transformation           && cat data/logs-to-subgraph-transformation           >> neume-network-data/logs-to-subgraph-transformation           && \
+          test -f data/music-os-accumulator-extraction           && cat data/music-os-accumulator-extraction           >> neume-network-data/music-os-accumulator-extraction           && \
+          test -f data/soundxyz-call-tokenuri-extraction         && cat data/soundxyz-call-tokenuri-extraction         >> neume-network-data/soundxyz-call-tokenuri-extraction         && \
+          test -f data/soundxyz-call-tokenuri-transformation     && cat data/soundxyz-call-tokenuri-transformation     >> neume-network-data/soundxyz-call-tokenuri-transformation     && \
+          test -f data/soundxyz-get-tokenuri-extraction          && cat data/soundxyz-get-tokenuri-extraction          >> neume-network-data/soundxyz-get-tokenuri-extraction          && \
+          test -f data/soundxyz-get-tokenuri-transformation      && cat data/soundxyz-get-tokenuri-transformation      >> neume-network-data/soundxyz-get-tokenuri-transformation      && \
+          test -f data/soundxyz-metadata-extraction              && cat data/soundxyz-metadata-extraction              >> neume-network-data/soundxyz-metadata-extraction              && \
+          test -f data/soundxyz-metadata-transformation          && cat data/soundxyz-metadata-transformation          >> neume-network-data/soundxyz-metadata-transformation          && \
+          test -f data/zora-call-tokenmetadatauri-extraction     && cat data/zora-call-tokenmetadatauri-extraction     >> neume-network-data/zora-call-tokenmetadatauri-extraction     && \
+          test -f data/zora-call-tokenmetadatauri-transformation && cat data/zora-call-tokenmetadatauri-transformation >> neume-network-data/zora-call-tokenmetadatauri-transformation && \
+          test -f data/zora-call-tokenuri-extraction             && cat data/zora-call-tokenuri-extraction             >> neume-network-data/zora-call-tokenuri-extraction             && \
+          test -f data/zora-get-tokenuri-extraction              && cat data/zora-get-tokenuri-extraction              >> neume-network-data/zora-get-tokenuri-extraction              && \
+          test -f data/zora-get-tokenuri-transformation          && cat data/zora-get-tokenuri-transformation          >> neume-network-data/zora-get-tokenuri-transformation
+      - name: Update neume-network/data
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         with:
-          path: neume-network-data
-      - name: Run a crawler step
-        id: run_step
-        uses: ./neume-network-data/.github/actions/run_step
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          rpc-http-host: ${{ secrets.RPC_HTTP_HOST }}
-          ipfs-https-gateway-key: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
-          current-step: 2
-          previous-step: 1
-
-  soundxyz-get-tokenuri:
-    runs-on: ubuntu-latest
-    needs: soundxyz-call-tokenuri
-    steps:
-      - name: Checkout neume-network/data
-        uses: actions/checkout@v3
-        with:
-          path: neume-network-data
-      - name: Run a crawler step
-        id: run_step
-        uses: ./neume-network-data/.github/actions/run_step
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          rpc-http-host: ${{ secrets.RPC_HTTP_HOST }}
-          ipfs-https-gateway-key: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
-          current-step: 3
-          previous-step: 2
-
-  zora-call-tokenuri:
-    runs-on: ubuntu-latest
-    needs: soundxyz-get-tokenuri
-    steps:
-      - name: Checkout neume-network/data
-        uses: actions/checkout@v3
-        with:
-          path: neume-network-data
-      - name: Run a crawler step
-        id: run_step
-        uses: ./neume-network-data/.github/actions/run_step
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          rpc-http-host: ${{ secrets.RPC_HTTP_HOST }}
-          ipfs-https-gateway-key: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
-          current-step: 4
-          previous-step: 3
-
-  zora-call-tokenmetadatauri:
-    runs-on: ubuntu-latest
-    needs: zora-call-tokenuri
-    steps:
-      - name: Checkout neume-network/data
-        uses: actions/checkout@v3
-        with:
-          path: neume-network-data
-      - name: Run a crawler step
-        id: run_step
-        uses: ./neume-network-data/.github/actions/run_step
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          rpc-http-host: ${{ secrets.RPC_HTTP_HOST }}
-          ipfs-https-gateway-key: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
-          current-step: 5
-          previous-step: 4
-
-  zora-get-tokenuri:
-    runs-on: ubuntu-latest
-    needs: zora-call-tokenmetadatauri
-    steps:
-      - name: Checkout neume-network/data
-        uses: actions/checkout@v3
-        with:
-          path: neume-network-data
-      - name: Run a crawler step
-        id: run_step
-        uses: ./neume-network-data/.github/actions/run_step
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          rpc-http-host: ${{ secrets.RPC_HTTP_HOST }}
-          ipfs-https-gateway-key: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
-          current-step: 6
-          previous-step: 5
-
-  music-os-accumulator:
-    runs-on: ubuntu-latest
-    needs: zora-get-tokenuri
-    steps:
-      - name: Checkout neume-network/data
-        uses: actions/checkout@v3
-        with:
-          path: neume-network-data
-      - name: Run a crawler step
-        id: run_step
-        uses: ./neume-network-data/.github/actions/run_step
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          rpc-http-host: ${{ secrets.RPC_HTTP_HOST }}
-          ipfs-https-gateway-key: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
-          current-step: 7
-          previous-step: 6
-          push-to-repo: true
+          source-directory: "data"
+          destination-github-username: "neume-network"
+          destination-repository-name: "data"
+          user-email: info@neume.network
+          target-directory: results
+          target-branch: ${{ github.ref_name }}

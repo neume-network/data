@@ -4,9 +4,9 @@ import { env } from "process";
 export default [
   [
     {
-      name: "soundxyz-get-tokenuri",
+      name: "soundxyz-call-tokenuri",
       extractor: {
-        args: [resolve(env.DATA_DIR, "soundxyz-call-tokenuri-transformation")],
+        args: [resolve(env.DATA_DIR, "logs-to-subgraph-transformation")],
       },
       transformer: {},
     },

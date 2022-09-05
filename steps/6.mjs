@@ -4,11 +4,9 @@ import { env } from "process";
 export default [
   [
     {
-      name: "zora-get-tokenuri",
+      name: "zora-call-tokenmetadatauri",
       extractor: {
-        args: [
-          resolve(env.DATA_DIR, "zora-call-tokenmetadatauri-transformation"),
-        ],
+        args: [resolve(env.DATA_DIR, "logs-to-subgraph-transformation")],
       },
       transformer: {},
     },
