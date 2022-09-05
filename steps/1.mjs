@@ -34,7 +34,7 @@ export function ingestFile(name, mainObj = {}) {
   return copyObj;
 }
 
-export default [
+export default [[
   {
     name: "call-block-logs",
     transformer: {
@@ -46,4 +46,4 @@ export default [
       ],
     },
   },
-];
+]];
