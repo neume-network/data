@@ -19,6 +19,8 @@ jobs:
           chmod +x * && \
           ./generateBlockLogsCrawlPath > ../steps/call-block-logs-generated.mjs && |
           cd ../..
+        env:
+          DATA_DIR: data
       - name: Run a crawler step
         id: run_step
         uses: ./neume-network-data/.github/actions/run_step
