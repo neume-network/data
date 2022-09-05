@@ -9,6 +9,9 @@ jobs:
   index:
     runs-on: ubuntu-latest
     steps:
+      - uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Checkout neume-network/data
         uses: actions/checkout@v3
         with:
