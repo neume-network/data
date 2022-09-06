@@ -53,21 +53,6 @@ jobs:
           --config neume-network-data/config.mjs && \
           node neume-network-core/neume.mjs \
           --path neume-network-data/steps/3.mjs \
-          --config neume-network-data/config.mjs && \
-          node neume-network-core/neume.mjs \
-          --path neume-network-data/steps/4.mjs \
-          --config neume-network-data/config.mjs && \
-          node neume-network-core/neume.mjs \
-          --path neume-network-data/steps/5.mjs \
-          --config neume-network-data/config.mjs && \
-          node neume-network-core/neume.mjs \
-          --path neume-network-data/steps/6.mjs \
-          --config neume-network-data/config.mjs && \
-          node neume-network-core/neume.mjs \
-          --path neume-network-data/steps/7.mjs \
-          --config neume-network-data/config.mjs && \
-          node neume-network-core/neume.mjs \
-          --path neume-network-data/steps/8.mjs \
           --config neume-network-data/config.mjs
         shell: bash
         env:
