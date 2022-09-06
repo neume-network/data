@@ -87,7 +87,7 @@ jobs:
           test -f data/zora-get-tokenuri-transformation          && cat data/zora-get-tokenuri-transformation          >> neume-network-data/results/zora-get-tokenuri-transformation          || true
       - uses: sergeysova/jq-action@v2
         with:
-          cmd: jq -s 'add' data/music-os-accumulator-extraction neume-network-data/results/music-os-accumulator-extraction > neume-network-data/results/music-os-accumulator-extraction-new
+          cmd: jq -s 'add' neume-network-data/results/music-os-accumulator-extraction data/music-os-accumulator-extraction > neume-network-data/results/music-os-accumulator-extraction-new
       - name: Rename new music-os-accumulator-file
         shell: bash
         run: mv neume-network-data/results/music-os-accumulator-extraction-new neume-network-data/results/music-os-accumulator-extraction
