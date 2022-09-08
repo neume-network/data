@@ -8,7 +8,8 @@ import { slurpadd } from "../src/utils.mjs";
 const transferEventSelector =
   "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef";
 const fileName = "call-block-logs-transformation";
-test(`if ${fileName} file contains duplicates`, async (t) => {
+// NOTE: We're skipping this test as it's OK to have duplicates here.
+test.skip(`if ${fileName} file contains duplicates`, async (t) => {
   const list = await slurpadd(resolve("results", fileName));
   const ids = list.map(
     ({ log }) => `${log.address}/${BigInt(log.topics[3]).toString(10)}`
