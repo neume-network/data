@@ -1,19 +1,43 @@
 # neume-network/data
 
-- We crawl all of zora (catalog.works, sound.xyz daily through [GitHub Actions](https://github.com/neume-network/data/actions). 
-- You can set up your own crawl with [neume-network/core](https://github.com/neume-network/core)
-- But feel free to use the final data set: [results/music-os-accumulator-extraction](https://github.com/neume-network/data/blob/main/results/music-os-accumulator-extraction).
+[![Index data](https://github.com/neume-network/data/actions/workflows/node.js.yml/badge.svg)](https://github.com/neume-network/data/actions/workflows/node.js.yml)
+[![data quality assurance](https://github.com/neume-network/data/actions/workflows/dataqualityassurance.js.yml/badge.svg)](https://github.com/neume-network/data/actions/workflows/dataqualityassurance.js.yml)
 
-## Debugging a crawl
+> On-chain music NFT data.
 
-Since the crawl on GitHub Actions is taking up to two or three hours per run currently and since this means that the GitHub Action's interface stops reporting the full logs into the Actions interface, it means that if you want to debug a full crawler run, you'll have to wait for it to be canceled or finished because only then you can download the full log archive. Here's that option in the GitHub interface:
+## Introduction
 
-<img width="886" alt="Screenshot 2022-07-11 at 15 33 57" src="https://user-images.githubusercontent.com/2758453/178276723-6226f4f0-63f0-4c18-8e79-7413e3ed0c92.png">
+The Neume Network's goal is to build an open source, socially scalable, indexer
+for all activity within the emerging Web3 Music industry.
 
+In this repository, we're frequently crawling the entire Ethereum main network
+on platforms like:
 
-## Working releases
+- Zora
+- Catalog V1 & V2
+- Mint Songs V2
+- Sound.xyz
 
-Not all commits in neume-network/core work flawlesly in production. But some do and this is confirmed by e.g. a branch's top commit passing the entire crawl suite. Below are a number of tree states in neume-network/core that pass the entire crawling suite.
+for the latest music NFT releases. Every x minutes, a GitHub Action is fired
+that partially crawls a block range delta depending on the last crawl and so
+new music NFTs are continuously and automatically committed to this
+repository's `results` folder. For https://musicos.xyz/, we have a special file
+called `results/music-os-accumulator-extraction` that contains all neatly-
+formatted track metadata in a parsable JSON file. Our goal is to enable anyone
+to build the Spotify for Web3.
 
-- 2022-07-12: https://github.com/neume-network/core/tree/2ff8bd044b0bd4f063c406f558518e01a577c3d4
-- 2022-07-11: https://github.com/neume-network/core/tree/7c4a5b814f77e5e881658d7fadb9794caa160581
+## Continuous Data Retrieval
+
+- You can find [a list of indexing
+  jobs](https://github.com/neume-network/data/actions/workflows/node.js.yml) on
+  the GitHub Action's page.
+- Consider also checking out the GitHub Actions work flow file.
+- Note: Neume Network doesn't have to be run on GitHub Actions. It's best run
+  on a Unix machine that has an Erigon node running too.
+
+## Continuous Data Quality Assurance
+
+- All track data within `results/music-os-accumulator-extraction` is
+  neatly-formatted according to the JSON schema of
+  [`@neume-network/schema`](https://github.com/neume-network/schema/blob/main/schema.json).
+- We ensure consistency over any track's uniqueness in the list.
