@@ -1,0 +1,22 @@
+{
+  "name": "@neume-network/data",
+  "version": "0.0.1",
+  "description": "On-chain music NFT data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neume-network/data"
+  },
+  "keywords": [
+    "music",
+    "nfts",
+    "ethereum"
+  ],
+  "author": "Tim Daubenschütz <tim@daubenschuetz.de> (https://timdaub.github.io/)",
+  "devDependencies": {
+    "ava": "4.3.3"
+  }
+}
