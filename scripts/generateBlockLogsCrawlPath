@@ -1,6 +1,6 @@
 #!/bin/bash
 # $(()) parses a hexadecimal number to a decimal
-lastBlockNumber=$(($(./lastBlockNumber)));
+lastBlockNumber=$(($(./lastBlockNumber)+1));
 blockNumber=$(($(./blockNumber)));
 step0="[{name: \"call-block-logs\",extractor: {args: [${lastBlockNumber}, ${blockNumber}]}}]";
 artistRegistry="0x78e3adc0e811e4f93bd9f1f9389b923c9a3355c2";
