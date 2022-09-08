@@ -39,14 +39,7 @@ export default [
         args: [resolve(env.DATA_DIR, "logs-to-subgraph-transformation")],
       },
       transformer: {},
-    },
-    {
-      name: "soundxyz-metadata",
-      extractor: {
-        args: [resolve(env.DATA_DIR, "logs-to-subgraph-transformation")],
-      },
-      transformer: {},
-    },
+    }
   ],
   [
     {
