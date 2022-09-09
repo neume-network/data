@@ -41,3 +41,9 @@ to build the Spotify for Web3.
   neatly-formatted according to the JSON schema of
   [`@neume-network/schema`](https://github.com/neume-network/schema/blob/main/schema.json).
 - We ensure consistency over any track's uniqueness in the list.
+
+## Can I use this data?
+
+I (Tim) currently don't know how to best license the data in the repository. For the time being
+if you're in doubt about being able to use this data: Consider configuring and running 
+neume network yourself to download a similar data set as ours!
