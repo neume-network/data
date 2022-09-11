@@ -102,3 +102,6 @@ jobs:
           user-email: info@neume.network
           target-directory: results
           target-branch: ${{ github.ref_name }}
+          commit-message: |
+            Update from ${{github.server_url}}/${{github.repository}}/commit/${{github.sha}}
+            ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
