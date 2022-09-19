@@ -96,11 +96,10 @@ jobs:
         env:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         with:
-          source-directory: neume-network-data/results
+          source-directory: neume-network-data
           destination-github-username: "neume-network"
           destination-repository-name: "data"
           user-email: info@neume.network
-          target-directory: results
           target-branch: ${{ github.ref_name }}
           commit-message: |
             Update from ${{github.server_url}}/${{github.repository}}/commit/${{github.sha}}
