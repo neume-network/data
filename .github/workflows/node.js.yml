@@ -92,16 +92,11 @@ jobs:
         shell: bash
         run: mv neume-network-data/results/music-os-accumulator-extraction-new neume-network-data/results/music-os-accumulator-extraction
       - name: Update neume-network/data
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          SSH_DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        with:
-          source-directory: neume-network-data/results
-          destination-github-username: "neume-network"
-          destination-repository-name: "data"
-          user-email: info@neume.network
-          target-directory: results
-          target-branch: ${{ github.ref_name }}
-          commit-message: |
-            Update from ${{github.server_url}}/${{github.repository}}/commit/${{github.sha}}
-            ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+        run: |
+          cd neume-network-data
+          git config user.email info@neume.network
+          git config user.name neume-network
+          git add results/* scripts/lastBlockNumber
+          git commit -m "Update from ${{github.server_url}}/${{github.repository}}/commit/${{github.sha}}" -m "${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}"
+          git push origin HEAD:${{ github.ref_name }}
+

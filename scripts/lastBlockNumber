@@ -1,8 +1,3 @@
 #!/bin/bash
-# To get the last ten lines of the transformation file, we're using tail with
-# n=default, then grep a line that contains a blockNumber, match its content and
-# then extract the last value from the pipe.
-tail ../results/call-block-logs-transformation |\
-grep -o '"blockNumber":"[^"]*' |\
-grep -o '[^"]*$' |\
-tail -1
+# the last crawl ran till this block number
+echo "0xede56a"
