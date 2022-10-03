@@ -42,16 +42,16 @@ jobs:
         shell: bash
       - name: Run steps
         run: |
-          node neume-network-core/neume.mjs \
+          neume-network-core/neume.mjs \
           --path neume-network-data/steps/0.mjs \
           --config neume-network-data/config.mjs && \
-          node neume-network-core/neume.mjs \
+          neume-network-core/neume.mjs \
           --path neume-network-data/steps/1.mjs \
           --config neume-network-data/config.mjs && \
-          node neume-network-core/neume.mjs \
+          neume-network-core/neume.mjs \
           --path neume-network-data/steps/2.mjs \
           --config neume-network-data/config.mjs && \
-          node neume-network-core/neume.mjs \
+          neume-network-core/neume.mjs \
           --path neume-network-data/steps/3.mjs \
           --config neume-network-data/config.mjs
         shell: bash
