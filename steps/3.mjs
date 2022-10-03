@@ -6,6 +6,13 @@ import { env } from "process";
 export default [
   [
     {
+      name: "noizd-call-tokenuri",
+      extractor: {
+        args: [resolve(env.DATA_DIR, "logs-to-subgraph-transformation")],
+      },
+      transformer: {},
+    },
+    {
       name: "catalog-call-tokenuri",
       extractor: {
         args: [resolve(env.DATA_DIR, "logs-to-subgraph-transformation")],
@@ -42,6 +49,13 @@ export default [
     }
   ],
   [
+    {
+      name: "noizd-get-tokenuri",
+      extractor: {
+        args: [resolve(env.DATA_DIR, "noizd-call-tokenuri-transformation")],
+      },
+      transformer: {},
+    },
     {
       name: "catalog-get-tokenuri",
       extractor: {
