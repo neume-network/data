@@ -17,6 +17,7 @@ on platforms like:
 - Catalog V1 & V2
 - Mint Songs V2
 - Sound.xyz
+- Noizd
 
 for the latest music NFT releases. Every x minutes, a GitHub Action is fired
 that partially crawls a block range delta depending on the last crawl and so
