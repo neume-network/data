@@ -94,7 +94,7 @@ jobs:
         shell: bash
         run: mv neume-network-data/results/music-os-accumulator-extraction-new neume-network-data/results/music-os-accumulator-extraction
       - name: Test lastBlockNumber file
-        run: test 0 -eq $(grep -c 'echo ""' scripts/lastBlockNumber)
+        run: test 0 -eq $(grep -c 'echo ""' neume-network-data/scripts/lastBlockNumber)
       - name: Update neume-network/data
         run: |
           cd neume-network-data
