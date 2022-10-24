@@ -62,6 +62,7 @@ jobs:
           IPFS_HTTPS_GATEWAY_KEY: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
           EXTRACTION_WORKER_CONCURRENCY: 80
           DEBUG: neume-network-*
+          ARWEAVE_HTTPS_GATEWAY: https://arweave.net
       - name: Update neume-network/data files
         shell: bash
         run: |
