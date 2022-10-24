@@ -25,7 +25,13 @@ export default [
             evt.log.address === "0x0bc2a24ce568dad89691116d5b34deb6c203f342",
         ],
       },
-      transformer: {},
+      transformer: {
+        args: [
+          resolve(env.DATA_DIR, "noizd-call-tokenuri-extraction"),
+          "tokenURI"
+	],
+        outputFilename: "noizd-call-tokenuri",
+      },
     },
     {
       name: "call-tokenuri",
@@ -47,7 +53,13 @@ export default [
             evt.log.address === "0x0bc2a24ce568dad89691116d5b34deb6c203f342",
         ],
       },
-      transformer: {},
+      transformer: {
+        args: [
+          resolve(env.DATA_DIR, "catalog-call-tokenuri-extraction"),
+          "tokenURI"
+	],
+        outputFilename: "catalog-call-tokenuri",
+      },
     },
     {
       name: "call-tokenuri",
@@ -69,7 +81,13 @@ export default [
             evt.log.address === "0x2b5426a5b98a3e366230eba9f95a24f09ae4a584",
         ],
       },
-      transformer: {},
+      transformer: {
+        args: [
+          resolve(env.DATA_DIR, "mintsongs-call-tokenuri-extraction"),
+          "tokenURI"
+	],
+        outputFilename: "mintsongs-call-tokenuri",
+      },
     },
     {
       name: "call-tokenuri",
@@ -90,7 +108,13 @@ export default [
           (evt) => evt.metadata.platform.name === "sound",
         ],
       },
-      transformer: {},
+      transformer: {
+        args: [
+          resolve(env.DATA_DIR, "soundxyz-call-tokenuri-extraction"),
+          "tokenURI"
+	],
+        outputFilename: "soundxyz-call-tokenuri",
+      },
     },
     {
       name: "call-tokenuri",
@@ -112,7 +136,13 @@ export default [
             evt.log.address === "0xabefbc9fd2f806065b4f3c237d4b59d9a97bcac7",
         ],
       },
-      transformer: {},
+      transformer: {
+        args: [
+          resolve(env.DATA_DIR, "zora-call-tokenuri-extraction"),
+          "tokenURI"
+	],
+        outputFilename: "zora-call-tokenuri",
+      },
     },
     {
       name: "call-tokenuri",
@@ -134,7 +164,13 @@ export default [
             evt.log.address === "0xabefbc9fd2f806065b4f3c237d4b59d9a97bcac7",
         ],
       },
-      transformer: {},
+      transformer: {
+        args: [
+          resolve(env.DATA_DIR, "zora-call-tokenmetadatauri-extraction"),
+          "tokenURI"
+	],
+        outputFilename: "zora-call-tokenmetadatauri",
+      },
     },
   ],
   [
