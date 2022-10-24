@@ -23,7 +23,7 @@ export function ingestFile(name, mainObj = {}) {
   // NOTE: We don't want this function to have side effects as e.g. mutating
   // `mainObj`'s properties which is why we copy it.
   let copyObj = { ...mainObj };
-  const content = readFileSync(name).toString();
+  const content = readFileSync(resolve(name)).toString();
   const lines = content.split("\n").filter((line) => !!line);
 
   for (const line of lines) {
@@ -41,9 +41,9 @@ export default [[
       args: [
         resolve(env.DATA_DIR, "call-block-logs-extraction"),
 	ingestFile(
-          resolve(env.DATA_DIR, "sound-protocol-filter-contracts-transformation"),
+          "neume-network-data/results/sound-protocol-filter-contracts-transformation",
           ingestFile(
-            resolve(env.DATA_DIR, "soundxyz-filter-contracts-transformation"),
+            "neume-network-data/results/sound-protocol-filter-contracts-transformation"),
             platformAddresses
           ),
         ),
