@@ -43,7 +43,7 @@ export default [[
 	ingestFile(
           "neume-network-data/results/sound-protocol-filter-contracts-transformation",
           ingestFile(
-            "neume-network-data/results/sound-protocol-filter-contracts-transformation"),
+            "neume-network-data/results/sound-protocol-filter-contracts-transformation",
             platformAddresses
           ),
         ),
