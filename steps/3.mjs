@@ -95,6 +95,27 @@ export default [
     {
       name: "call-tokenuri",
       extractor: {
+        outputFilename: "sound-protocol-call-tokenuri",
+        args: [
+          resolve(env.DATA_DIR, "call-block-logs-transformation"),
+          {
+            name: "tokenURI",
+            type: "function",
+            inputs: [
+              {
+                name: "tokenId",
+                type: "uint256",
+              },
+            ],
+          },
+          (evt) => evt.metadata.platform.name === "sound-protocol",
+        ],
+      },
+      transformer: {},
+    },
+    {
+      name: "call-tokenuri",
+      extractor: {
         outputFilename: "zora-call-tokenuri",
         args: [
           resolve(env.DATA_DIR, "call-block-logs-transformation"),
@@ -171,6 +192,15 @@ export default [
       extractor: {
         args: [
           resolve(env.DATA_DIR, "zora-call-tokenmetadatauri-transformation"),
+        ],
+      },
+      transformer: {},
+    },
+    {
+      name: "sound-protocol-get-tokenuri",
+      extractor: {
+        args: [
+          resolve(env.DATA_DIR, "sound-protocol-call-tokenuri-transformation"),
         ],
       },
       transformer: {},

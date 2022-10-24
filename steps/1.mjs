@@ -40,9 +40,12 @@ export default [[
     transformer: {
       args: [
         resolve(env.DATA_DIR, "call-block-logs-extraction"),
-        ingestFile(
-          "neume-network-data/results/soundxyz-filter-contracts-transformation",
-          platformAddresses
+	ingestFile(
+          resolve(env.DATA_DIR, "sound-protocol-filter-contracts-transformation"),
+          ingestFile(
+            resolve(env.DATA_DIR, "soundxyz-filter-contracts-transformation"),
+            platformAddresses
+          ),
         ),
       ],
     },

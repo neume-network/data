@@ -14,7 +14,9 @@ step0="[{name: \"call-block-logs\",extractor: {args: [${lastBlockNumber}, ${bloc
 artistRegistry="0x78e3adc0e811e4f93bd9f1f9389b923c9a3355c2";
 artistCreateEvent="0x23748b43b77f98380e738976c6324996908ffc1989994dd3c68631c87a65a7c0";
 step1="[{name: \"soundxyz-filter-contracts\",transformer: {args: [\"${DATA_DIR}/call-block-logs-extraction\", \"${artistRegistry}\", \"${artistCreateEvent}\"]}}]";
+soundProtocolArtistCreateEvent="0x405098db99342b699216d8150e930dbbf2f686f5a43485aed1e69219dafd4935";
+step2="[{name: \"sound-protocol-filter-contracts\",transformer: {args: [\"${DATA_DIR}/call-block-logs-extraction\", \"${soundProtocolArtistCreateEvent}\"]}}]";
 
-crawlpath="export default [${step0}, ${step1}];";
+crawlpath="export default [${step0}, ${step1}, ${step2}];";
 
 echo $crawlpath;
