@@ -52,9 +52,6 @@ jobs:
           --config neume-network-data/config.mjs && \
           neume-network-core/neume.mjs \
           --path neume-network-data/steps/2.mjs \
-          --config neume-network-data/config.mjs && \
-          neume-network-core/neume.mjs \
-          --path neume-network-data/steps/3.mjs \
           --config neume-network-data/config.mjs
         shell: bash
         env:
@@ -68,27 +65,30 @@ jobs:
       - name: Update neume-network/data files
         shell: bash
         run: |
-          test -f data/call-block-logs-extraction                && rm data/call-block-logs-extraction || \
-          test -f data/call-block-logs-transformation            && cat data/call-block-logs-transformation            >> neume-network-data/results/call-block-logs-transformation            || \
-          test -f data/soundxyz-filter-contracts-transformation  && cat data/soundxyz-filter-contracts-transformation  >> neume-network-data/results/soundxyz-filter-contracts-transformation  || \
-          test -f data/logs-to-subgraph-transformation           && cat data/logs-to-subgraph-transformation           >> neume-network-data/results/logs-to-subgraph-transformation           || \
-          test -f data/soundxyz-call-tokenuri-extraction         && cat data/soundxyz-call-tokenuri-extraction         >> neume-network-data/results/soundxyz-call-tokenuri-extraction         || \
-          test -f data/soundxyz-call-tokenuri-transformation     && cat data/soundxyz-call-tokenuri-transformation     >> neume-network-data/results/soundxyz-call-tokenuri-transformation     || \
-          test -f data/soundxyz-get-tokenuri-extraction          && cat data/soundxyz-get-tokenuri-extraction          >> neume-network-data/results/soundxyz-get-tokenuri-extraction          || \
-          test -f data/soundxyz-get-tokenuri-transformation      && cat data/soundxyz-get-tokenuri-transformation      >> neume-network-data/results/soundxyz-get-tokenuri-transformation      || \
-          test -f data/soundxyz-metadata-extraction              && cat data/soundxyz-metadata-extraction              >> neume-network-data/results/soundxyz-metadata-extraction              || \
-          test -f data/soundxyz-metadata-transformation          && cat data/soundxyz-metadata-transformation          >> neume-network-data/results/soundxyz-metadata-transformation          || \
-          test -f data/catalog-call-tokenuri-extraction          && cat data/catalog-call-tokenuri-extraction          >> neume-network-data/results/catalog-call-tokenuri-extraction          || \
-          test -f data/catalog-get-tokenuri-extraction           && cat data/catalog-get-tokenuri-extraction           >> neume-network-data/results/catalog-get-tokenuri-extraction           || \
-          test -f data/noizd-call-tokenuri-extraction            && cat data/noizd-call-tokenuri-extraction            >> neume-network-data/results/noizd-call-tokenuri-extraction            || \
-          test -f data/noizd-get-tokenuri-extraction             && cat data/noizd-get-tokenuri-extraction             >> neume-network-data/results/noizd-get-tokenuri-extraction             || \
-          test -f data/mintsongs-call-tokenuri-extraction        && cat data/mintsongs-call-tokenuri-extraction        >> neume-network-data/results/mintsongs-call-tokenuri-extraction        || \
-          test -f data/mintsongs-get-tokenuri-extraction         && cat data/mintsongs-get-tokenuri-extraction         >> neume-network-data/results/mintsongs-get-tokenuri-extraction         || \
-          test -f data/zora-call-tokenmetadatauri-extraction     && cat data/zora-call-tokenmetadatauri-extraction     >> neume-network-data/results/zora-call-tokenmetadatauri-extraction     || \
-          test -f data/zora-call-tokenmetadatauri-transformation && cat data/zora-call-tokenmetadatauri-transformation >> neume-network-data/results/zora-call-tokenmetadatauri-transformation || \
-          test -f data/zora-call-tokenuri-extraction             && cat data/zora-call-tokenuri-extraction             >> neume-network-data/results/zora-call-tokenuri-extraction             || \
-          test -f data/zora-get-tokenuri-extraction              && cat data/zora-get-tokenuri-extraction              >> neume-network-data/results/zora-get-tokenuri-extraction              || \
-          test -f data/zora-get-tokenuri-transformation          && cat data/zora-get-tokenuri-transformation          >> neume-network-data/results/zora-get-tokenuri-transformation          || true
+          test -f data/call-block-logs-extraction                      && rm data/call-block-logs-extraction                                                                                                     || \
+          test -f data/call-block-logs-transformation                  && cat data/call-block-logs-transformation                  >> neume-network-data/results/call-block-logs-transformation                  || \
+          test -f data/soundxyz-filter-contracts-transformation        && cat data/soundxyz-filter-contracts-transformation        >> neume-network-data/results/soundxyz-filter-contracts-transformation        || \
+          test -f data/soundxyz-call-tokenuri-extraction               && cat data/soundxyz-call-tokenuri-extraction               >> neume-network-data/results/soundxyz-call-tokenuri-extraction               || \
+          test -f data/soundxyz-call-tokenuri-transformation           && cat data/soundxyz-call-tokenuri-transformation           >> neume-network-data/results/soundxyz-call-tokenuri-transformation           || \
+          test -f data/sound-protocol-call-tokenuri-extraction         && cat data/sound-protocol-call-tokenuri-extraction         >> neume-network-data/results/sound-protocol-call-tokenuri-extraction         || \
+          test -f data/sound-protocol-call-tokenuri-transformation     && cat data/sound-protocol-call-tokenuri-transformation     >> neume-network-data/results/sound-protocol-call-tokenuri-transformation     || \
+          test -f data/soundxyz-get-tokenuri-extraction                && cat data/soundxyz-get-tokenuri-extraction                >> neume-network-data/results/soundxyz-get-tokenuri-extraction                || \
+          test -f data/soundxyz-get-tokenuri-transformation            && cat data/soundxyz-get-tokenuri-transformation            >> neume-network-data/results/soundxyz-get-tokenuri-transformation            || \
+          test -f data/sound-protocol-get-tokenuri-extraction          && cat data/sound-protocol-get-tokenuri-extraction          >> neume-network-data/results/sound-protocol-get-tokenuri-extraction          || \
+          test -f data/sound-protocol-get-tokenuri-transformation      && cat data/sound-protocol-get-tokenuri-transformation      >> neume-network-data/results/sound-protocol-get-tokenuri-transformation      || \
+          test -f data/soundxyz-metadata-extraction                    && cat data/soundxyz-metadata-extraction                    >> neume-network-data/results/soundxyz-metadata-extraction                    || \
+          test -f data/soundxyz-metadata-transformation                && cat data/soundxyz-metadata-transformation                >> neume-network-data/results/soundxyz-metadata-transformation                || \
+          test -f data/catalog-call-tokenuri-extraction                && cat data/catalog-call-tokenuri-extraction                >> neume-network-data/results/catalog-call-tokenuri-extraction                || \
+          test -f data/catalog-get-tokenuri-extraction                 && cat data/catalog-get-tokenuri-extraction                 >> neume-network-data/results/catalog-get-tokenuri-extraction                 || \
+          test -f data/noizd-call-tokenuri-extraction                  && cat data/noizd-call-tokenuri-extraction                  >> neume-network-data/results/noizd-call-tokenuri-extraction                  || \
+          test -f data/noizd-get-tokenuri-extraction                   && cat data/noizd-get-tokenuri-extraction                   >> neume-network-data/results/noizd-get-tokenuri-extraction                   || \
+          test -f data/mintsongs-call-tokenuri-extraction              && cat data/mintsongs-call-tokenuri-extraction              >> neume-network-data/results/mintsongs-call-tokenuri-extraction              || \
+          test -f data/mintsongs-get-tokenuri-extraction               && cat data/mintsongs-get-tokenuri-extraction               >> neume-network-data/results/mintsongs-get-tokenuri-extraction               || \
+          test -f data/zora-call-tokenmetadatauri-extraction           && cat data/zora-call-tokenmetadatauri-extraction           >> neume-network-data/results/zora-call-tokenmetadatauri-extraction           || \
+          test -f data/zora-call-tokenmetadatauri-transformation       && cat data/zora-call-tokenmetadatauri-transformation       >> neume-network-data/results/zora-call-tokenmetadatauri-transformation       || \
+          test -f data/zora-call-tokenuri-extraction                   && cat data/zora-call-tokenuri-extraction                   >> neume-network-data/results/zora-call-tokenuri-extraction                   || \
+          test -f data/zora-get-tokenuri-extraction                    && cat data/zora-get-tokenuri-extraction                    >> neume-network-data/results/zora-get-tokenuri-extraction                    || \
+          test -f data/zora-get-tokenuri-transformation                && cat data/zora-get-tokenuri-transformation                >> neume-network-data/results/zora-get-tokenuri-transformation                || true
       - uses: sergeysova/jq-action@v2
         with:
           cmd: jq -s 'add' neume-network-data/results/music-os-accumulator-extraction data/music-os-accumulator-extraction > neume-network-data/results/music-os-accumulator-extraction-new
