@@ -16,7 +16,7 @@ on platforms like:
 - Zora
 - Catalog V1 & V2
 - Mint Songs V2
-- Sound.xyz
+- Sound.xyz & Sound Protocol
 - Noizd
 
 for the latest music NFT releases. Every x minutes, a GitHub Action is fired
