@@ -58,7 +58,7 @@ jobs:
           DATA_DIR: data
           RPC_HTTP_HOST: ${{ secrets.RPC_HTTP_HOST }}
           RPC_API_KEY: ""
-          IPFS_HTTPS_GATEWAY: https://neume.infura-ipfs.io/ipfs/
+          IPFS_HTTPS_GATEWAY: ${{ secrets.IPFS_HTTPS_GATEWAY }}
           IPFS_HTTPS_GATEWAY_KEY: ${{ secrets.IPFS_HTTPS_GATEWAY_KEY }}
           EXTRACTION_WORKER_CONCURRENCY: 80
           DEBUG: neume-network-*
