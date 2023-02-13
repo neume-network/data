@@ -1,3 +1,3 @@
 #!/bin/bash
 # the last crawl ran till this block number
-echo "0xfd8e9c"
+echo "0xfd8eef"
