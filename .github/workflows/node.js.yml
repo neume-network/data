@@ -81,6 +81,8 @@ jobs:
           test -f data/soundxyz-metadata-transformation                && cat data/soundxyz-metadata-transformation                >> neume-network-data/results/soundxyz-metadata-transformation                || \
           test -f data/catalog-call-tokenuri-extraction                && cat data/catalog-call-tokenuri-extraction                >> neume-network-data/results/catalog-call-tokenuri-extraction                || \
           test -f data/catalog-get-tokenuri-extraction                 && cat data/catalog-get-tokenuri-extraction                 >> neume-network-data/results/catalog-get-tokenuri-extraction                 || \
+          test -f data/catalog-call-tokenuri-transformation            && cat data/catalog-call-tokenuri-transformation            >> neume-network-data/results/catalog-call-tokenuri-transformation            || \
+          test -f data/catalog-get-tokenuri-transformation             && cat data/catalog-get-tokenuri-transformation             >> neume-network-data/results/catalog-get-tokenuri-transformation             || \
           test -f data/noizd-call-tokenuri-extraction                  && cat data/noizd-call-tokenuri-extraction                  >> neume-network-data/results/noizd-call-tokenuri-extraction                  || \
           test -f data/noizd-get-tokenuri-extraction                   && cat data/noizd-get-tokenuri-extraction                   >> neume-network-data/results/noizd-get-tokenuri-extraction                   || \
           test -f data/mintsongs-call-tokenuri-extraction              && cat data/mintsongs-call-tokenuri-extraction              >> neume-network-data/results/mintsongs-call-tokenuri-extraction              || \
