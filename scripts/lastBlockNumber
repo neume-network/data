@@ -1,3 +1,3 @@
 #!/bin/bash
 # the last crawl ran till this block number
-echo "0x1026241"
+echo "0x1026368"
